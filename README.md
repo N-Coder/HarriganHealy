@@ -1,6 +1,6 @@
 # Level Planarity Test by Harrigan & Healy
 
-This is an [ogdf-python](https://github.com/ogdf/ogdf-python) implementation of the quadratic-time Level Planarity test and embedder by Harrigan and Healy.
+[This](./HarriganHealy.ipynb) is an [ogdf-python](https://github.com/ogdf/ogdf-python) implementation of the quadratic-time Level Planarity test and embedder by Harrigan and Healy.
 
 > Harrigan, M., Healy, P. (2008). Practical Level Planarity Testing and Layout with Embedding Constraints. In: Hong, SH., Nishizeki, T., Quan, W. (eds) Graph Drawing. GD 2007. Lecture Notes in Computer Science, vol 4875. Springer, Berlin, Heidelberg. https://doi.org/10.1007/978-3-540-77537-9_9
 

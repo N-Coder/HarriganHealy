@@ -1,5 +1,18 @@
 from ogdf_python import *
 
+cppyy.cppdef("""
+using namespace std;
+using namespace ogdf;
+
+void bendEdge(GraphAttributes& GA, edge e, double bend) {
+    DPoint vec = GA.point(e->target()) - GA.point(e->source());
+    DPoint mid = GA.point(e->source()) + (vec / 2);
+    DPoint ort = vec.orthogonal();
+    ort *= vec.norm() / ort.norm();
+    GA.bends(e).pushBack(mid + ort * bend);
+}
+""")
+
 def drawLevelGraph(GA, emb, scaleX=50, scaleY=50):
     maxlvl = max(map(len, emb))
     for y, lvl in enumerate(emb):
@@ -72,7 +85,7 @@ class MatplotlibLevelGraphEditor(MatplotlibGraphEditor):
             e = adj.theEdge()
             self.GA.bends[e].clear()
             if self.LVL.cellOf(adj.twinNode()) == l:
-                g.bendEdge(self.GA, e, ((((e.index() * 7) % 10) / 50) + 0.2) * ((e.index() % 2) * 2 - 1))
+                cppyy.gbl.bendEdge(self.GA, e, ((((e.index() * 7) % 10) / 50) + 0.2) * ((e.index() % 2) * 2 - 1))
 
     def add_node(self, n, *args, **kwargs):
         self.on_node_moved(n)
